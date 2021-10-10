@@ -51,9 +51,10 @@ app.post('/getfontmin', function(request, response){
 });
 
 const schedule = require('node-schedule');
-// 当前时间的秒值为 10 时执行任务，如：2018-7-8 13:25:10
-schedule.scheduleJob('* * 5 * * *', () => {
-  console.log(new Date());
+// 凌晨5点执行一次清理工作
+schedule.scheduleJob('0 0 5 * * *', () => {
+  console.log('start clear storage ',new Date());
+  // 删除一天前的文件
   findRemoveSync(path.join(__dirname,'font'), {age: {seconds: 86400}, limit: 100, dir: '*'})
 });
 app.listen(3000);
