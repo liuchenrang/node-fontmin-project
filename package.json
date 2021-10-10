@@ -14,9 +14,11 @@
     "cheerio": "^1.0.0-rc.3",
     "express": "^4.17.1",
     "filereader": "^0.10.3",
+    "find-remove": "^3.1.0",
     "fontmin": "^0.9.8",
     "log4js": "^6.3.0",
     "node-fetch": "^2.6.0",
+    "node-schedule": "^2.0.0",
     "superagent": "^6.1.0",
     "superagent-charset": "^0.1.1"
   }

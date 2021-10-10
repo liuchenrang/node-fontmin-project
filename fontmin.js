@@ -24,7 +24,6 @@ module.exports = function (font, text, callback) {
         if (err) {                  // 异常捕捉
             console.error(err);
         }
-        console.log('done',files);        // 成功
         return callback('done',textHext)
     });
 }
