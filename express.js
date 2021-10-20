@@ -4,7 +4,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const findRemoveSync = require('find-remove')
 const path = require('path')
-
+const os = require("os")
 // 设置可用字体
 const fonts = [
     {font: 'SourceHanSerifCN-Medium', name: '思源宋体'},
@@ -26,8 +26,7 @@ app.use(express.urlencoded({
 }));
 app.use(express.static(__dirname+'/'))
 app.get("/health/check", function(req,rsp){
-  rsp.send({ok:1});
-
+  rsp.send({hostname:os.hostname});
 })
 // post 接口
 app.post('/getfontmin', function(request, response){
