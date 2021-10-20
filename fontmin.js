@@ -6,6 +6,9 @@ module.exports = function (font, text, callback) {
     var destPath = './font';    // 输出路径
     var text = text || '';
     var textHext = md5(text)
+
+    const subfonts = path.join(destPath, textHext, "subset");
+    // if(path.)
     // 初始化
     var fontmin = new Fontmin()
         .src(srcPath)               // 输入配置
@@ -16,7 +19,7 @@ module.exports = function (font, text, callback) {
         .use(Fontmin.ttf2woff())    // woff 转换插件
         .use(Fontmin.ttf2svg())     // svg 转换插件
         .use(Fontmin.css())         // css 生成插件
-        .dest(path.join(destPath,textHext,"subset"));            // 输出配置
+        .dest(subfonts);            // 输出配置
 
     // 执行
 
