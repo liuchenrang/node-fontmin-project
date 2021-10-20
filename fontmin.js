@@ -10,7 +10,7 @@ module.exports = function (font, text, callback) {
 
     const subfonts = path.join(destPath, textHext, "subset");
     fs.stat(subfonts,function(err,stats){
-      if(!err && stats.isDirectory() && stats.size > 0){
+      if(stats && stats.isDirectory() && stats.size > 0){
         console.log("use cache hash " ,textHext, " size " , stats.size)
         return callback('done',textHext)
       }else{
