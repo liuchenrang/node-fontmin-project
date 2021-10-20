@@ -26,7 +26,7 @@ app.use(express.urlencoded({
 }));
 app.use(express.static(__dirname+'/'))
 app.get("/health/check", function(req,rsp){
-  rsp.send({hostname:os.hostname});
+  rsp.send({hostname:os.hostname()});
 })
 // post 接口
 app.post('/getfontmin', function(request, response){

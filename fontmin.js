@@ -23,7 +23,7 @@ module.exports = function (font, text, callback) {
             .use(Fontmin.ttf2eot())     // eot 转换插件
             .use(Fontmin.ttf2woff())    // woff 转换插件
             .use(Fontmin.ttf2svg())     // svg 转换插件
-            .use(Fontmin.css())         // css 生成插件
+            // .use(Fontmin.css())         // css 生成插件
             .dest(subfonts);            // 输出配置
 
         // 执行
