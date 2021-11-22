@@ -6,7 +6,7 @@ module.exports = function (font, text, callback) {
     var srcPath = `./fonts/${font}.ttf`; // 字体源文件
     var destPath = './font';    // 输出路径
     var text = text || '';
-    var textHext = md5(text)
+    var textHext = md5(text+font)
 
     const subfonts = path.join(destPath, textHext, "subset");
     fs.stat(subfonts,function(err,stats){
