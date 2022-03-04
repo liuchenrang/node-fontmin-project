@@ -12,6 +12,7 @@ const fonts = [
     {font: 'RuiziGongfangMeiheiGBK', name: '锐字工房云字库美黑GBK'},
     {font: 'RuiziZhenyanti', name: '锐字真言体'},
     {font: 'YousheBiaotihei', name: '优设标题黑'},
+    {font: 'fandixiaowanzixiaoxueban', name: '新蒂小丸子小学版'},
     {font: 'Zihun116', name: '字魂116号-凤鸣手书'}
 ]
 
@@ -25,7 +26,7 @@ app.use(express.urlencoded({
     extended:true
 }));
 app.use(express.static(__dirname+'/'))
-app.get("/health/check", function(req,rsp){
+app.head("/health/check", function(req,rsp){
   rsp.send({hostname:os.hostname()});
 })
 // post 接口
