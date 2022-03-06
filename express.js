@@ -18,10 +18,11 @@ const fonts = [
 
 // express 实例
 const app = express();
+// 转化参数设置
+app.use(express.json());
 app.use((req, res, next) => {
-  //设置请求头
-  const isOps = req.method === 'OPTIONS';
-  if (isOps) {
+  if (req.method === 'OPTIONS') {
+    //设置请求头
     res.set({
       'Access-Control-Allow-Credentials': true,
       'Access-Control-Max-Age': 1728000,
@@ -30,13 +31,19 @@ app.use((req, res, next) => {
       'Access-Control-Allow-Methods': 'PUT,POST,GET,DELETE,OPTIONS',
       'Content-Type': 'application/json; charset=utf-8',
     });
-    res.status(204).end() ;
-  }else{
-    next();
+    res.status(204).end();
+  } else {
+        //设置请求头
+        res.set({
+          'Access-Control-Allow-Credentials': true,
+          'Access-Control-Max-Age': 1728000,
+          'Access-Control-Allow-Origin': req.headers.origin || '*',
+          'Access-Control-Allow-Headers': 'X-Requested-With,Content-Type',
+          'Access-Control-Allow-Methods': 'PUT,POST,GET,DELETE,OPTIONS',
+        });
+        next();
   }
 });
-// 转化参数设置
-
 app.use(
   express.urlencoded({
     extended: true,
@@ -47,8 +54,6 @@ app.head('/health/check', function (req, rsp) {
   rsp.send({ hostname: os.hostname() });
 });
 // post 接口
-app.use(express.json());
-
 app.post('/getfontmin', function (request, response) {
   const params = request.body;
   const font = params.font;
@@ -64,17 +69,16 @@ app.post('/getfontmin', function (request, response) {
           url: '/font/' + textHex + '/subset/' + font + '.ttf',
           font: font,
         };
-        response.json(back);
+        response.send(back);
       }
     });
   } else {
-    response.status(200);
-    response.json({erorr:'没有请求的字体文件'});
+    response.status(400);
+    response.send('没有请求的字体文件');
   }
 });
 
 const schedule = require('node-schedule');
-const { json } = require('body-parser');
 // 凌晨5点执行一次清理工作
 schedule.scheduleJob('0 0 5 * * *', () => {
   console.log('start clear storage ', new Date());
